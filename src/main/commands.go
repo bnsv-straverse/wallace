@@ -50,7 +50,7 @@ func registerCommands(cmdManager *CommandManager) {
 				params.Username = user.RealName
 				params.IconURL = user.Profile.Image192
 				params.LinkNames = 1
-				event.api.PostMessage(channelId[1], event.args[2], params)
+				event.api.PostMessage(channelId[1], slack.MsgOptionText(event.args[2], false), slack.MsgOptionPostMessageParameters(params))
 			}
 		}
 	}, newOptions().
@@ -151,7 +151,7 @@ func registerCommands(cmdManager *CommandManager) {
 		params.AsUser = true
 		params.Attachments = attachments
 
-		event.api.PostMessage(event.source.Channel, "Food trucks at Great Northern Way", params)
+		event.api.PostMessage(event.source.Channel, slack.MsgOptionText("Food trucks at Great Northern Way", false), slack.MsgOptionPostMessageParameters(params))
 	}, newOptions().
 		MatchChannel("^C").
 		MatchMsg("^Reminder: foodtruck").
